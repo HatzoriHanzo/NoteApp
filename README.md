@@ -41,15 +41,66 @@ exports.sendNotification = functions.firestore
 Descrição do Aplicativo
 Este aplicativo é um aplicativo de anotações desenvolvido em Kotlin usando Jetpack Compose para a UI. Ele permite aos usuários criar, editar e excluir anotações. As anotações são armazenadas em um banco de dados local e sincronizadas com o Firebase para armazenamento online e atualizações em tempo real.  
 
+## Notificações de Lembrete
+
+O aplicativo possui um recurso de lembrete que pode ser ativado ou desativado ao adicionar ou editar uma nota. Quando um lembrete é definido para uma nota, uma notificação é enviada 24 horas antes do horário do lembrete.
+
+Aqui está uma versão simplificada de como isso funciona no Firebase e Firestore:
+
+```javascript
+exports.sendReminderNotification = functions.firestore
+    .document("notes/{noteId}")
+    .onWrite(async (change, context) => {
+      const note = change.after.data();
+      const reminderDate = new Date(note.reminderDate);
+
+      if (reminderDate && reminderDate > 0) {
+        const oneDay = 24 * 60 * 60 * 1000;
+        const now = Date.now();
+
+        if ((reminderDate.getTime() - now) <= oneDay) {
+          const token = note.token;
+
+          const payload = {
+            notification: {
+              title: "Lembrete!",
+              body: `Sua nota "${note.title}" vence amanhã!`,
+            },
+          };
+
+          const message = {
+            token: token,
+            notification: payload.notification,
+          };
+
+          try {
+            const response = await admin.messaging().send(message);
+            console.log("Notification sent successfully:", response);
+          } catch (error) {
+            console.error("Error sending notification:", error);
+          }
+        }
+      }
+    });
+```
+
+Neste código, uma função do Firebase é configurada para disparar quando ocorre uma alteração em um documento na coleção 'notes' no Firestore. Quando isso acontece, a função verifica se a nota tem um lembrete definido e se o lembrete está a menos de 24 horas de distância. Se essas condições forem atendidas, uma notificação é enviada para o dispositivo do usuário com um token específico. A notificação informa ao usuário que a nota está vencendo no dia seguinte.
+
+## Funcionalidades do app
 NotesScreen: Esta é a tela principal do aplicativo onde todas as anotações são exibidas. Cada nota pode ser clicada para navegar para a AddEditNoteScreen. A cor de fundo desta tela muda dinamicamente com um efeito de animação. Quando uma nota é excluída, uma snackbar é mostrada com a opção de desfazer a exclusão. A exclusão é tratada pelo NotesViewModel, que atualiza o banco de dados local e o Firebase.  
 
-AddEditNoteScreen: Esta tela é usada para adicionar uma nova nota ou editar uma existente. Ela tem campos para o título e conteúdo da nota. Também tem um recurso de lembrete que pode ser ativado ou desativado. Quando uma nota é adicionada ou editada, o AddEditNoteViewModel atualiza o banco de dados local e o Firebase com a nova ou atualizada nota.  
+- AddEditNoteScreen: Esta tela é usada para adicionar uma nova nota ou editar uma existente. Ela tem campos para o título e conteúdo da nota. Também tem um recurso de lembrete que pode ser ativado ou desativado. Quando uma nota é adicionada ou editada, o AddEditNoteViewModel atualiza o banco de dados local e o Firebase com a nova ou atualizada nota.  
 
-BoxBackgroundImageComponent: Este componente é usado para exibir uma caixa com uma imagem de fundo. A cor de fundo desta caixa muda dinamicamente com um efeito de animação.  
+- BoxBackgroundImageComponent: Este componente é usado para exibir uma caixa com uma imagem de fundo. A cor de fundo desta caixa muda dinamicamente com um efeito de animação.  
 
-OrderSection: Este componente é usado para ordenar as notas com base em diferentes critérios. A ordem é aplicada pelo NotesViewModel, que atualiza a ordem no banco de dados local e no Firebase.  
+- OrderSection: Este componente é usado para ordenar as notas com base em diferentes critérios. A ordem é aplicada pelo NotesViewModel, que atualiza a ordem no banco de dados local e no Firebase.  
 
-O aplicativo usa um ViewModel (NotesViewModel e AddEditNoteViewModel) para gerenciar o estado e lidar com eventos. O estado inclui a lista de notas, a ordem atual das notas e se a seção de ordem está visível. Os eventos incluem ações como alternar a seção de ordem, mudar a ordem das notas, excluir uma nota e restaurar uma nota excluída.  O aplicativo também usa navegação para alternar entre a NotesScreen e a AddEditNoteScreen. A rota AddEditNoteScreen inclui parâmetros para o ID da nota e a cor.  O aplicativo usa um Scaffold para fornecer uma estrutura de layout consistente, incluindo um botão de ação flutuante para adicionar novas notas. A cor de fundo do botão de ação flutuante é selecionada aleatoriamente de uma lista de cores de notas.  O banco de dados local é implementado usando Room, que fornece uma camada de abstração sobre o SQLite. A integração com o Firebase é tratada usando o SDK do Firebase, que fornece APIs para interagir com os serviços do Firebase como Firestore e Firebase Authentication. A sincronização entre o banco de dados local e o Firebase é tratada pelos ViewModels, que atualizam tanto o banco de dados local quanto o Firebase sempre que uma nota é adicionada, editada ou excluída.*
+- O aplicativo usa um ViewModel (NotesViewModel e AddEditNoteViewModel) para gerenciar o estado e lidar com eventos. O estado inclui a lista de notas, a ordem atual das notas e se a seção de ordem está visível. Os eventos incluem ações como alternar a seção de ordem, mudar a ordem das notas, excluir uma nota e restaurar uma nota excluída.
+- O aplicativo também usa navegação para alternar entre a NotesScreen e a AddEditNoteScreen.
+- A rota AddEditNoteScreen inclui parâmetros para o ID da nota e a cor.
+- O aplicativo usa um Scaffold para fornecer uma estrutura de layout consistente, incluindo um botão de ação flutuante para adicionar novas notas. A cor de fundo do botão de ação flutuante é selecionada aleatoriamente de uma lista de cores de notas.
+- O banco de dados local é implementado usando Room, que fornece uma camada de abstração sobre o SQLite. 
+- A integração com o Firebase é tratada usando o SDK do Firebase, que fornece APIs para interagir com os serviços do Firebase como Firestore e Firebase Authentication. A sincronização entre o banco de dados local e o Firebase é tratada pelos ViewModels, que atualizam tanto o banco de dados local quanto o Firebase sempre que uma nota é adicionada, editada ou excluída.*
 
 
 
