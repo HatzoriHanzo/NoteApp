@@ -1,5 +1,6 @@
 package com.example.noteapp.presentation.add_edit_note.components
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.Animatable
@@ -46,12 +47,13 @@ import com.example.noteapp.R
 import com.example.noteapp.feature_note.domain.model.Note
 import com.example.noteapp.presentation.add_edit_note.AddEditNoteEvent
 import com.example.noteapp.presentation.add_edit_note.AddEditNoteViewModel
-import com.example.noteapp.ui.components.LargeSpacer
 import com.example.noteapp.presentation.util.formatToddMMyyyyHHmm
 import com.example.noteapp.presentation.util.toLocalDateTime
+import com.example.noteapp.ui.components.LargeSpacer
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun AddEditNoteScreen(
@@ -102,12 +104,12 @@ fun AddEditNoteScreen(
         }
     }, snackbarHost = {
         SnackbarHost(snackbarHostState)
-    }) { paddingValues ->
+    }) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(noteBackgroundAnimatable.value)
-                .padding(top = dimensionResource(id = R.dimen.extra_large_margin))
+                .padding(top = dimensionResource(id = R.dimen.not_so_extra_large_margin))
                 .padding(dimensionResource(id = R.dimen.large_margin))
         ) {
             Row(
@@ -198,7 +200,11 @@ fun AddEditNoteScreen(
                             })
                     }
                 } else {
-                    Text(stringResource(R.string.definir_lembrete))
+                    Text(
+                        text = stringResource(R.string.definir_lembrete),
+                        color = MaterialTheme.colors.onSurface,
+                        style = MaterialTheme.typography.h6
+                    )
                     Switch(checked = viewModel.noteReminderSwitch.value,
                         onCheckedChange = { isChecked ->
                             viewModel.onEvent(AddEditNoteEvent.ChangeReminderSwitch(isChecked))

@@ -1,10 +1,10 @@
 package com.example.noteapp.presentation.notes.components
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.repeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -47,10 +47,10 @@ import com.example.noteapp.feature_note.domain.model.Note
 import com.example.noteapp.presentation.notes.NotesEvent
 import com.example.noteapp.presentation.notes.NotesViewModel
 import com.example.noteapp.presentation.util.Screen
-import com.example.noteapp.ui.components.BoxBackgroundImageComponent
 import com.example.noteapp.ui.components.LargeSpacer
 import kotlinx.coroutines.launch
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun NotesScreen(
     modifier: Modifier = Modifier,
@@ -73,7 +73,6 @@ fun NotesScreen(
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.large_margin)),
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.large_margin)),
@@ -86,7 +85,7 @@ fun NotesScreen(
             }
         },
         scaffoldState = scaffoldState,
-    ) { paddingValues ->
+    ) {
 
         Column(
             modifier = Modifier
@@ -100,6 +99,7 @@ fun NotesScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
+                    modifier = Modifier.padding(dimensionResource(id = R.dimen.large_margin)),
                     text = stringResource(R.string.suas_anotacoes),
                     style = MaterialTheme.typography.h4
                 )
