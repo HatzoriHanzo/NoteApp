@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">NoteApp</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="color">Color</string>
+    <string name="reminder">Reminder</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="suas_anotacoes">Suas anotações:</string>
+    <string name="permiss_o_necess_ria">Permissão necessária:</string>
+    <string name="n_s_precisamos_que_voc_ceda_estas_permiss_es_para_que_o_app_funcione_corretamente">Nós precisamos que você ceda estas permissões para que o app funcione corretamente:\n\n</string>
+    <string name="_1_post_notifications_para_enviar_notifica_es_sobre_suas_notas">1. Post Notifications: Para enviar notificações sobre suas notas.\n</string>
+    <string name="_2_schedule_exact_alarm_para_agendar_lembretes_em_um_hor_rio_exato_para_que_voc_nunca_perca_um_prazo">2. Schedule Exact Alarm: Para agendar lembretes em um horário exato, para que você nunca perca um prazo.</string>
+    <string name="conceder_permiss_es">Conceder permissões\n</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="definir_lembrete">Definir Lembrete:</string>
+    <string name="salvar_nota">Salvar nota</string>
+    <string name="editar_data_do_lembrete">Editar data do lembrete :</string>
+    <string name="voc_tem_um_lembrete_de_nota_pendente">Você tem um lembrete de nota pendente!</string>
+    <string name="note_app">Note App</string>
+</resources>
