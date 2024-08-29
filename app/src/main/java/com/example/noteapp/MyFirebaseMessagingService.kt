@@ -1,17 +1,14 @@
 package com.example.noteapp
 
-import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.firebase.messaging.RemoteMessage
-import android.app.PendingIntent
 import android.app.NotificationManager
-import android.content.ContentValues.TAG
-import android.content.Context
+import android.app.PendingIntent
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.noteapp.feature_note.domain.util.SharedPrefManager
 import com.example.noteapp.presentation.MainActivity
-import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -45,7 +42,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         )
 
         val notificationBuilder =
-            NotificationCompat.Builder(this, "channel_id").setContentTitle("Note Reminder")
+            NotificationCompat.Builder(this, "channel_id").setContentTitle("Note App - Firebase")
                 .setContentText(messageBody).setSmallIcon(R.drawable.ic_firebase_notification)
                 .setContentIntent(pendingIntent)
 
