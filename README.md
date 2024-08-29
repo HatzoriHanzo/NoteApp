@@ -102,4 +102,56 @@ NotesScreen: Esta é a tela principal do aplicativo onde todas as anotações s�
 - A integração com o Firebase é tratada usando o SDK do Firebase, que fornece APIs para interagir com os serviços do Firebase como Firestore e Firebase Authentication. A sincronização entre o banco de dados local e o Firebase é tratada pelos ViewModels, que atualizam tanto o banco de dados local quanto o Firebase sempre que uma nota é adicionada, editada ou excluída.*
 
 
+## Requisitos 
+
+- Adicionar Notas 
+
+O usuário pode adicionar uma nova nota com título, descrição e data de vencimento. Isso é feito através da classe AddEditNoteViewModel com o evento AddEditNoteEvent.SaveNote, que adiciona ou edita notas no banco de dados ROOM e no Firestore.  
+
+- Listar Notas
+  
+O aplicativo exibe uma lista de notas adicionadas. As notas são obtidas através da função getNotes() presente no NotesViewModel, que é responsável por listar todas as notas do banco de dados.  
+
+- Editar Notas
+  
+O usuário pode editar o título, descrição e data de vencimento de uma nota. Isso é feito através da classe AddEditNoteViewModel com o evento AddEditNoteEvent.SaveNote, que adiciona ou edita notas no banco de dados ROOM e no Firestore.  
+
+- Excluir Notas
+  
+O usuário pode excluir uma nota. Isso é feito através do NotesViewModel com o evento NotesEvent.DeleteNote, que deleta uma nota do banco de dados e na FireStore.  
+
+- Persistência Local
+  
+As notas são armazenadas localmente usando Room. Isso é feito através da classe NoteDatabase.  
+
+- Notificações Push Locais
+  
+O aplicativo faz uso de AlarmManager e Broadcast Receiver para enviar notificações locais e tocar alarme com alarmManager.setExactAndAllowWhileIdle().  
+
+- Notificações Push Firebase
+  
+O aplicativo envia notificações push usando o Firebase Cloud Messaging (FCM). Isso é feito através das funções checkAndSendReminder, sendNewNoteNotification e sendNewNoteIfDueDateTomorrow. 
+
+## Desafios Técnicos
+
+- Arquitetura
+  
+O projeto utiliza a arquitetura MVVM (Model-View-ViewModel) e Clean Architecture. Isso é evidente pelo uso de ViewModel e LiveData na função AddEditNoteScreen, além do uso de MutableState e gerenciamento de estado.  
+
+- Persistência de Dados
+  
+O projeto utiliza Room para persistência de dados. Isso é feito através da classe NoteDatabase.  
+
+- Notificações Push
+  
+O projeto utiliza Firebase Cloud Messaging (FCM) para notificações push. Isso é feito através das funções checkAndSendReminder, sendNewNoteNotification e sendNewNoteIfDueDateTomorrow.  
+
+- UI/UX
+  
+O projeto utiliza Material Design para a interface do usuário. Isso é evidente nos componentes AddEditNoteScreen e AddEditNoteScreen.kt, que são responsáveis pela interface do usuário para adicionar/editar notas. 
+ 
+- Testes
+  
+O projeto inclui testes unitários e de UI. Isso é evidente nos arquivos NotesScreenTest e AddEditNoteViewModelTest, que contêm testes de UI e unitários, respectivamente.
+
 
