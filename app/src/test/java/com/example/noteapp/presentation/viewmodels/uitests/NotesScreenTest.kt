@@ -1,7 +1,6 @@
 package com.example.noteapp.presentation.viewmodels.uitests
 
 import NoteAppTheme
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.isNotDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription

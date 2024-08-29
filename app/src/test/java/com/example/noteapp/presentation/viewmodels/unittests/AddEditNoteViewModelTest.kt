@@ -1,11 +1,11 @@
 package com.example.noteapp.presentation.viewmodels.unittests
 
-import android.content.SharedPreferences
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.SavedStateHandle
 import com.example.noteapp.feature_note.domain.firestore_use_case.FirestoreUseCases
 import com.example.noteapp.feature_note.domain.use_case.NoteUseCases
+import com.example.noteapp.feature_note.domain.util.SharedPrefManager
 import com.example.noteapp.presentation.add_edit_note.AddEditNoteEvent
 import com.example.noteapp.presentation.add_edit_note.AddEditNoteViewModel
 import com.example.noteapp.presentation.viewmodels.BaseViewModelTest
@@ -36,7 +36,7 @@ class AddEditNoteViewModelTest : BaseViewModelTest() {
     private lateinit var firestoreUseCases: FirestoreUseCases
 
     @Mock
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferences: SharedPrefManager
 
     private lateinit var viewModel: AddEditNoteViewModel
 
