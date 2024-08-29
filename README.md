@@ -48,43 +48,42 @@ O aplicativo possui um recurso de lembrete que pode ser ativado ou desativado ao
 Aqui está uma versão simplificada de como isso funciona no Firebase e Firestore:
 
 ```javascript
-exports.sendReminderNotification = functions.firestore
-    .document("notes/{noteId}")
-    .onWrite(async (change, context) => {
-      const note = change.after.data();
-      const reminderDate = new Date(note.reminderDate);
+   const currentTime = new Date();
+	currentTime.setHours(0, 0, 0, 0);
+    const oneDayInMillis = 24 * 60 * 60 * 1000;
 
-      if (reminderDate && reminderDate > 0) {
-        const oneDay = 24 * 60 * 60 * 1000;
-        const now = Date.now();
+    const tomorrowStart = currentTime.getTime() + oneDayInMillis;
+    const dayAfterTomorrowStart = tomorrowStart + oneDayInMillis;
 
-        if ((reminderDate.getTime() - now) <= oneDay) {
-          const token = note.token;
+    const reminderDateMillis = note.reminderDate;
 
-          const payload = {
+    if (reminderDateMillis >= tomorrowStart && reminderDateMillis <= dayAfterTomorrowStart) {
+        const token = note.token;
+
+        const payload = {
             notification: {
-              title: "Lembrete!",
-              body: `Sua nota "${note.title}" vence amanhã!`,
+                title: "Lembrete!",
+                body: `Sua nota:"${note.title}" vence amanhã!`,
             },
-          };
+        };
 
-          const message = {
+        const message = {
             token: token,
             notification: payload.notification,
-          };
+        };
 
-          try {
+        try {
             const response = await admin.messaging().send(message);
             console.log("Notification sent successfully:", response);
-          } catch (error) {
+        } catch (error) {
             console.error("Error sending notification:", error);
-          }
         }
-      }
-    });
+    }
+});
 ```
 
-Neste código, uma função do Firebase é configurada para disparar quando ocorre uma alteração em um documento na coleção 'notes' no Firestore. Quando isso acontece, a função verifica se a nota tem um lembrete definido e se o lembrete está a menos de 24 horas de distância. Se essas condições forem atendidas, uma notificação é enviada para o dispositivo do usuário com um token específico. A notificação informa ao usuário que a nota está vencendo no dia seguinte.
+Essa função, chamada sendNewNoteIfDueDateTomorrow, é acionada sempre que um novo documento é criado na coleção 'notes' do Firestore. Ela verifica se a data de lembrete da nota está dentro do próximo dia.  Primeiro, a função obtém a data e hora atuais e define as horas, minutos, segundos e milissegundos para 0, o que dá o início do dia atual. Em seguida, adiciona 24 horas (em milissegundos) ao início do dia atual para obter o início do próximo dia e adiciona mais 24 horas ao início do próximo dia para obter o início do dia seguinte.  A função então verifica se a data de lembrete da nota (em milissegundos) é maior ou igual ao início do próximo dia e menor ou igual ao início do dia seguinte. Se for, a função prepara uma mensagem de notificação com o título "Lembrete!" e o corpo informando que a nota vence no dia seguinte.  Finalmente, a função tenta enviar a mensagem de notificação usando o método send do serviço de mensagens do Firebase Admin. Se a mensagem for enviada com sucesso, a função registra uma mensagem de sucesso no console. Se ocorrer um erro ao enviar a mensagem, a função registra o erro no console.
+
 
 ## Funcionalidades do app
 NotesScreen: Esta é a tela principal do aplicativo onde todas as anotações são exibidas. Cada nota pode ser clicada para navegar para a AddEditNoteScreen. A cor de fundo desta tela muda dinamicamente com um efeito de animação. Quando uma nota é excluída, uma snackbar é mostrada com a opção de desfazer a exclusão. A exclusão é tratada pelo NotesViewModel, que atualiza o banco de dados local e o Firebase.  
