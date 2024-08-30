@@ -11,6 +11,28 @@ NoteApp é um aplicativo de anotações desenvolvido em Kotlin usando Jetpack Co
 - ![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat&logo=node.js&logoColor=white) - Ambiente de execução para executar código JavaScript no lado do servidor.
 - ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?style=flat&logo=firebase&logoColor=black) - Usado para serviços de back-end como autenticação, banco de dados e notificações push.
 
+## Libraries utilizadas: 
+
+- ![Kotlin](https://img.icons8.com/color/48/000000/kotlin.png) **Kotlin** - Primary programming language.
+- **Jetpack Compose** - UI toolkit.
+- **Dagger Hilt** - Dependency injection.
+- **Room** - Local database.
+- ![Firebase](https://img.icons8.com/color/48/000000/firebase.png) **Firebase** - Backend services including Firestore and FCM.
+- **Kotlin Coroutines** - Asynchronous programming.
+- **LiveData** - Observable data holder.
+- **Navigation Component** - App navigation.
+## Annotation Processor Used
+
+- KSP (Kotlin Symbol Processing):
+
+KSP is a tool developed by Google to facilitate annotation processing for Kotlin. It allows you to write custom processors that can generate Kotlin code, inspect code for validation, and support Kotlin-only features like data classes, sealed classes, etc. It offers better performance and full Kotlin support compared to Java-based annotation processors.
+
+## Build Configuration
+- Kotlin DSL:
+Kotlin DSL (Domain-Specific Language) is used for writing build scripts in Kotlin instead of Groovy. It leverages Kotlin's type safety, tooling support (e.g., autocompletion), and refactoring capabilities, making your build scripts more robust and maintainable. 
+
+
+
 ## Notificações Push
 
 As notificações push no aplicativo são realizadas através do Firebase Cloud Messaging (FCM). O arquivo `index.js` contém uma Firebase Cloud Function que dispara uma notificação push quando um determinado evento ocorre.
@@ -153,5 +175,25 @@ O projeto utiliza Material Design para a interface do usuário. Isso é evidente
 - Testes
   
 O projeto inclui testes unitários e de UI. Isso é evidente nos arquivos NotesScreenTest e AddEditNoteViewModelTest, que contêm testes de UI e unitários, respectivamente.
+
+App Demo : 
+
+
+
+## Creating a note / deleting / undoing a deletion
+https://github.com/user-attachments/assets/2ee79d07-c181-45ce-8232-10561a188e4c
+
+## Editing a note and sorting notes
+
+https://github.com/user-attachments/assets/2cd20905-ad7b-42c6-a4b6-4484e7f6499c
+
+## Alarm firing off : 
+
+https://github.com/user-attachments/assets/92de630f-0f64-4d3c-aa59-1c2130c9a7ba
+
+
+
+
+
 
 
