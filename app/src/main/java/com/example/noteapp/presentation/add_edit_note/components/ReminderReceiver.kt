@@ -8,9 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.media.RingtoneManager
-import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.noteapp.R
 import com.example.noteapp.presentation.util.Constants.REMINDER_CHANNEL_ID
 
@@ -20,6 +18,7 @@ class ReminderReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
+        val noteContent = intent.getStringExtra("note_content")
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
         mediaPlayer = MediaPlayer.create(context, alarmSound)
         mediaPlayer?.start()
@@ -37,7 +36,7 @@ class ReminderReceiver : BroadcastReceiver() {
         val notification = NotificationCompat.Builder(context, REMINDER_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_local_notification)
             .setContentTitle(context.getString(R.string.note_app))
-            .setContentText(context.getString(R.string.voc_tem_um_lembrete_de_nota_pendente))
+            .setContentText(context.getString(R.string.lembrete_da_nota, noteContent ?: ""))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setDeleteIntent(getDismissIntent(context))
             .build()

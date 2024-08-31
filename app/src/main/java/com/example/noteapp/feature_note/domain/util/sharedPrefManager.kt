@@ -7,13 +7,13 @@ class SharedPrefManager(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
 
-    fun saveUserId(userId: String) {
+    fun saveFirebaseUserId(userId: String) {
         val editor = sharedPreferences.edit()
         editor.putString("userId", userId)
         editor.apply()
     }
 
-    fun getUserId(): String? {
+    fun getFirebaseUserId(): String? {
         return sharedPreferences.getString("userId", null)
     }
 

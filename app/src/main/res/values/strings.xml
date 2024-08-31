@@ -18,4 +18,6 @@
     <string name="editar_data_do_lembrete">Editar data do lembrete :</string>
     <string name="voc_tem_um_lembrete_de_nota_pendente">Você tem um lembrete de nota pendente!</string>
     <string name="note_app">Note App</string>
+    <string name="lembrete_da_nota">Lembrete da nota: %1$s</string>
+    <string name="lembrete">Lembrete: %1$s</string>
 </resources>

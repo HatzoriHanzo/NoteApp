@@ -75,7 +75,7 @@ fun NotesScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.large_margin)),
+                modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.extra_large_margin)),
                 onClick = {
                     navController.navigate(Screen.AddEditNoteScreen.route)
                 },

@@ -8,7 +8,11 @@ import androidx.room.Room
 import com.example.noteapp.feature_note.data.data_source.NoteDatabase
 import com.example.noteapp.feature_note.data.repository.FirestoreRepositoryImpl
 import com.example.noteapp.feature_note.data.repository.NoteRepositoryImpl
+import com.example.noteapp.feature_note.domain.firestore_use_case.AddNoteFirestoreUseCase
+import com.example.noteapp.feature_note.domain.firestore_use_case.DeleteNoteFirestoreUseCase
 import com.example.noteapp.feature_note.domain.firestore_use_case.FirestoreUseCases
+import com.example.noteapp.feature_note.domain.firestore_use_case.GetFirebaseUserIdUseCase
+import com.example.noteapp.feature_note.domain.firestore_use_case.SaveFirebaseUserIdUseCase
 import com.example.noteapp.feature_note.domain.repository.FireStoreRepository
 import com.example.noteapp.feature_note.domain.repository.NoteRepository
 import com.example.noteapp.feature_note.domain.use_case.AddNoteUseCase
@@ -39,9 +43,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirestoreUseCases(
-        repository: FireStoreRepository, sharedPrefManager: SharedPrefManager
+        repository: FireStoreRepository
     ): FirestoreUseCases {
-        return FirestoreUseCases(repository, sharedPrefManager)
+        return FirestoreUseCases(
+            addNote = AddNoteFirestoreUseCase(repository),
+            deleteNote = DeleteNoteFirestoreUseCase(repository),
+            saveFirebaseUserId = SaveFirebaseUserIdUseCase(repository),
+            getFirebaseUserId = GetFirebaseUserIdUseCase(repository)
+        )
     }
 
     @Provides
@@ -52,8 +61,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFireStoreRepository(firestore: FirebaseFirestore): FireStoreRepository {
-        return FirestoreRepositoryImpl(firestore)
+    fun provideFireStoreRepository(
+        firestore: FirebaseFirestore, sharedPrefManager: SharedPrefManager
+    ): FireStoreRepository {
+        return FirestoreRepositoryImpl(firestore, sharedPrefManager)
     }
 
     @Provides

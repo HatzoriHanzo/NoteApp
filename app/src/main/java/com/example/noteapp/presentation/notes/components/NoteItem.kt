@@ -24,10 +24,12 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.ColorUtils
+import com.example.noteapp.R
 import com.example.noteapp.feature_note.domain.model.Note
 import com.example.noteapp.presentation.util.formatToddMMyyyyHHmm
 import com.example.noteapp.presentation.util.toLocalDateTime
@@ -100,7 +102,7 @@ fun NoteItem(
                         style = MaterialTheme.typography.h6,
                         color = MaterialTheme.colors.onSurface,
                         maxLines = 1,
-                        text = "Reminder: $formattedReminderDateTime"
+                        text = stringResource(R.string.lembrete, formattedReminderDateTime)
                     )
                     Icon(
                         imageVector = Icons.Default.Alarm,

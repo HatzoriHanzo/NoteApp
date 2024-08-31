@@ -1,7 +1,6 @@
 package com.example.noteapp.presentation.notes
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -37,7 +36,7 @@ class NotesViewModel @Inject constructor(
         getNotes(NoteOrder.Date(OrderType.Descending))
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            firestoreUseCases.saveUserId(userId)
+            firestoreUseCases.saveFirebaseUserId(userId)
         }
     }
 
@@ -57,7 +56,7 @@ class NotesViewModel @Inject constructor(
                     firestoreUseCases.deleteNote(event.note.id ?: 0)
                     recentlyDeletedFireStoreNote = FireStoreNote(
                         id = event.note.id,
-                        userId = sharedPrefManager.getUserId() ?: "",
+                        userId = firestoreUseCases.getFirebaseUserId()  ?: "",
                         title = event.note.title,
                         content = event.note.content,
                         reminderDate = event.note.reminderTime ?: 0,

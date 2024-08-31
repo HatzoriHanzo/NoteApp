@@ -24,7 +24,6 @@ import com.example.noteapp.presentation.add_edit_note.components.AddEditNoteScre
 import com.example.noteapp.presentation.notes.components.NotesScreen
 import com.example.noteapp.presentation.util.Constants.REQUEST_CODE
 import com.example.noteapp.presentation.util.Screen
-import com.example.noteapp.ui.components.BoxBackgroundImageComponent
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,7 +74,7 @@ class MainActivity : ComponentActivity() {
                     Log.d(TAG, "signInAnonymously:success")
                     val user = FirebaseAuth.getInstance().currentUser
                     user?.let {
-                        sharedPrefManager.saveUserId(it.uid)
+                        sharedPrefManager.saveFirebaseUserId(it.uid)
                     }
                 } else {
                     Log.w(TAG, "signInAnonymously:failure", task.exception)
