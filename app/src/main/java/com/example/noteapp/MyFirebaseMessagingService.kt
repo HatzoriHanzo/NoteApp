@@ -6,7 +6,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.noteapp.feature_note.domain.util.SharedPrefManager
-import com.example.noteapp.presentation.MainActivity
+import com.example.noteapp.presentation.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dagger.hilt.android.AndroidEntryPoint

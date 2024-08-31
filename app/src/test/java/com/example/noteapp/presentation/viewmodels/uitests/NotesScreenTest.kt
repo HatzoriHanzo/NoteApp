@@ -8,7 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.example.noteapp.presentation.MainActivity
+import com.example.noteapp.presentation.main.MainActivity
 import com.example.noteapp.presentation.notes.components.NotesScreen
 import org.junit.Rule
 import org.junit.Test
