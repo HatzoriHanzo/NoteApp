@@ -196,6 +196,6 @@ https://github.com/user-attachments/assets/92de630f-0f64-4d3c-aa59-1c2130c9a7ba
 
 Faça o download do APK aqui : 
 
-https://file.io/U2z3dCmHBqWI
+https://drive.google.com/file/d/1WfcpN-IQi_8M6Zm2bp-1aj6IYJt8sMDV/view?usp=drivesdk
 
 
