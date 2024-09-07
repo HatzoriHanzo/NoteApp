@@ -68,9 +68,6 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     testImplementation(libs.androidx.core)
-    androidTestImplementation (libs.androidx.junit.ktx)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     testImplementation (libs.kotlinx.coroutines.test)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
@@ -80,6 +77,7 @@ dependencies {
     //Mockito
     testImplementation (libs.mockito.kotlin)
     implementation (libs.mockito.inline)
+
     //testing
     implementation (libs.androidx.core.testing)
 
