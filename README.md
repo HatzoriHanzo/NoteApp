@@ -194,6 +194,8 @@ https://github.com/user-attachments/assets/92de630f-0f64-4d3c-aa59-1c2130c9a7ba
 
 
 
+Faça o download do APK aqui : 
 
+https://file.io/U2z3dCmHBqWI
 
 
